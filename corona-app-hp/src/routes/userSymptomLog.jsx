@@ -46,6 +46,9 @@ export default function UserSymptomLog() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (editFormData.name !== "" && editFormData.lastname !== "")
+      return;
+
     const newFormData = [...listData];
     newFormData.push(editFormData)
     setList(newFormData);
@@ -103,7 +106,7 @@ export default function UserSymptomLog() {
                   <br />
                   <input
                     type="text"
-                    required="required"
+                    required
                     name="name"
                     value={editFormData.name}
                     onChange={handleEditFormChange}
@@ -113,7 +116,7 @@ export default function UserSymptomLog() {
                   <label>Apellidos</label><br />
                   <input
                     type="text"
-                    required="required"
+                    required
                     name="lastname"
                     value={editFormData.lastname}
                     onChange={handleEditFormChange}
@@ -126,8 +129,13 @@ export default function UserSymptomLog() {
                 <Col md={3} >
                   <label>temperatura</label><br />
                   <input
+                    onKeyPress={(event) => {
+                      if (!/[0-9]/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
                     type="text"
-                    required="required"
+                    required
                     name="temperature"
                     value={editFormData.temperature}
                     onChange={handleEditFormChange}
@@ -137,7 +145,6 @@ export default function UserSymptomLog() {
               <br />
               <Row>
                 <label>Sintomas</label><br />
-
                 <Col md={1} >
                   <Checkbox name="Fiebre" label={"Fiebre"} onChange={handleEditFormChange} />
                 </Col>
