@@ -46,7 +46,7 @@ export default function UserSymptomLog() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (editFormData.name !== "" && editFormData.lastname !== "")
+    if (editFormData.name === "" && editFormData.lastname === "")
       return;
 
     const newFormData = [...listData];
