@@ -97,7 +97,7 @@ export default function UserSymptomLog() {
   return (
     <LocalizationProvider language={locale.language}>
       <IntlProvider locale={locale.locale}>
-        <Container>
+        <Container >
           <div className="pb-4">
             <form onSubmit={(event) => handleSubmit(event)}>
               <Row>
@@ -178,7 +178,7 @@ export default function UserSymptomLog() {
               </div>
             </form>
           </div>
-          <Table striped bordered hover size="sm" className="text-center align-middle ">
+          <Table striped bordered hover size="sx" className="text-center align-middle ">
             <thead>
               <tr>
                 <th>Nombre</th>

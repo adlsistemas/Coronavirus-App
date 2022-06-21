@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Moment from 'react-moment';
 import { Grid, GridColumn } from "@progress/kendo-react-grid";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import CardDetail from "../components/CardDetail/cardDetail"
 import axios from "axios"
 Moment.globalLocale = 'es';
@@ -15,7 +15,7 @@ export default function DetailVirus() {
         return resp;
     }
     useEffect(() => {
-        populateData(); 
+        populateData();
 
     }, [])
 
@@ -32,16 +32,17 @@ export default function DetailVirus() {
                 <h1>Casos Globales</h1>
                 <small>Actualizado:  <Moment>{listDataGlobal.Date}</Moment></small>
                 <div className="d-flex justify-content-center">
-                    <div className="col-3">
-                        <CardDetail data={{ Title: "Confirmados", Info: listDataGlobal.TotalConfirmed === 0 ? "-" : listDataGlobal.TotalConfirmed, foot: `+ ${listDataGlobal?.NewConfirmed ?? ""}`, }}></CardDetail>
-                    </div>
-                    <div className="col-3">
-                        <CardDetail data={{ Title: "Fallecidos", Info: listDataGlobal.TotalDeaths === 0 ? "-" : listDataGlobal.TotalDeaths, foot: `+ ${listDataGlobal?.NewDeaths ?? ""}`, }}></CardDetail>
-                    </div>
-                    <div className="col-3">
-                        <CardDetail data={{ Title: "Recuperados", Info: listDataGlobal.TotalRecovered === 0 ? "-" : listDataGlobal.TotalRecovered, foot: `+ ${listDataGlobal?.NewRecovered ?? ""}`, }}></CardDetail>
-                    </div>
-
+                    <Row>
+                        <Col md={4} >
+                            <CardDetail data={{ Title: "Confirmados", Info: listDataGlobal.TotalConfirmed === 0 ? "-" : listDataGlobal.TotalConfirmed, foot: `+ ${listDataGlobal?.NewConfirmed ?? ""}`, }}></CardDetail>
+                        </Col>
+                        <Col md={4} >
+                            <CardDetail data={{ Title: "Fallecidos", Info: listDataGlobal.TotalDeaths === 0 ? "-" : listDataGlobal.TotalDeaths, foot: `+ ${listDataGlobal?.NewDeaths ?? ""}`, }}></CardDetail>
+                        </Col>
+                        <Col md={4} >
+                            <CardDetail data={{ Title: "Recuperados", Info: listDataGlobal.TotalRecovered === 0 ? "-" : listDataGlobal.TotalRecovered, foot: `+ ${listDataGlobal?.NewRecovered ?? ""}`, }}></CardDetail>
+                        </Col>
+                    </Row>
                 </div>
                 {/* <Grid style={{ height: "400px" }} data={
                     [
