@@ -9,6 +9,7 @@ import DetailVirus from "./routes/detailVirus";
 import UserSymptomLog from "./routes/userSymptomLog"; 
 import { Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css"
+import DetailCountry from "./routes/detailCountry";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root")
@@ -20,9 +21,9 @@ root.render(
         <Route path="/" element={<App />}  >
           <Route path="/SymptomLog" element={<UserSymptomLog />} />
           <Route path="/DetailVirus" element={<DetailVirus />} />
+          <Route path="/DetailCountry/:idCountry" element={<DetailCountry />} />
         </Route>
-        <Route path="*" element={<App />}
-        />
+        <Route path="*" element={<App />}  />
       </Routes>
     </BrowserRouter></Container>
 );

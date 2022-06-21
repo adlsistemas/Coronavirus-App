@@ -2,6 +2,7 @@
 import { Navbar, Container, Nav } from "react-bootstrap"
 import { Outlet, Link } from "react-router-dom";
 import Header from "./components/Header/header";
+import '@progress/kendo-theme-default/dist/all.css';
 
 export default function App() {
   return (
