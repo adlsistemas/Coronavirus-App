@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Row, Container, Col, Button, Table } from "react-bootstrap"
-
 import { DatePicker } from "@progress/kendo-react-dateinputs";
 import { Checkbox } from "@progress/kendo-react-inputs";
 import {
@@ -33,12 +32,11 @@ loadMessages(esMessages, "es-ES");
 
 export default function UserSymptomLog() {
 
-  const [value, setValue] = React.useState(new Date());
   const [listData, setList] = useState([]);
   const [editFormData, setEditFormData] = useState({
     name: "",
     lastname: "",
-    bornDate: "",
+    bornDate: new Date(),
     temperature: "",
     symptom: []
 
@@ -46,16 +44,15 @@ export default function UserSymptomLog() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (editFormData.name === "" && editFormData.lastname === "")
-      return;
-
+    if (editFormData.name === "" && editFormData.lastname === "" && editFormData.temperature === "")
+      return; 
     const newFormData = [...listData];
     newFormData.push(editFormData)
-    setList(newFormData);
+    setList(newFormData); 
     setEditFormData({
       name: "",
       lastname: "",
-      bornDate: "",
+      bornDate: new Date(),
       temperature: "",
       symptom: []
 
@@ -71,18 +68,26 @@ export default function UserSymptomLog() {
       newFormData[fieldName] = fieldValue;
     }
     else {
-      if (event.target.value) {
-        const newFormDataSymptom = [...editFormData.symptom];
-        newFormDataSymptom.push(event.target.name);
-        newFormData.symptom = newFormDataSymptom;
-      }
-      else {
-        newFormData.symptom = newFormData.symptom.filter(function (ele) {
-          return ele !== event.target.name;
-        })
+      switch (event.target.name) {
+        case "bornDate":
+          const fieldName = event.target.name;
+          const fieldValue = new Date(event.target.value);
+          newFormData[fieldName] = fieldValue;
+          break;
+        default:
+          if (event.target.value) {
+            const newFormDataSymptom = [...editFormData.symptom];
+            newFormDataSymptom.push(event.target.name);
+            newFormData.symptom = newFormDataSymptom;
+          }
+          else {
+            newFormData.symptom = newFormData.symptom.filter(function (ele) {
+              return ele !== event.target.name;
+            })
+          }
+          break;
       }
     }
-
     setEditFormData(newFormData);
   };
 
@@ -91,9 +96,7 @@ export default function UserSymptomLog() {
     locale: "en",
   });
 
-  const changeDate = ({ value }) => {
-    setValue(value);
-  };
+
   return (
     <LocalizationProvider language={locale.language}>
       <IntlProvider locale={locale.locale}>
@@ -124,7 +127,7 @@ export default function UserSymptomLog() {
                 </Col>
                 <Col md={3} >
                   <label>Fecha de nacimiento</label>
-                  <DatePicker defaultValue={value} defaultShow={true} />
+                  <DatePicker name="bornDate" defaultValue={editFormData.bornDate} defaultShow={true} onChange={handleEditFormChange} />
                 </Col>
                 <Col md={3} >
                   <label>temperatura</label><br />
@@ -194,7 +197,7 @@ export default function UserSymptomLog() {
                   <tr key={i}>
                     <td>{data.name} </td>
                     <td>{data.lastname} </td>
-                    <td>{data.bornDate} </td>
+                    <td> {data.bornDate.toLocaleDateString()}   </td>
                     <td>{data.temperature} </td>
                     <td>{data.symptom.map((dataSymptom, j) => (
                       <ul key={j}>

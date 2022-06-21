@@ -20,7 +20,7 @@ const CardDetail = ({ data }) => {
                     style={{ background: "transparent" }}
                 >
                     <div>
-                        <CardTitle style={{ marginBottom: "4px", textDecoration: "underline" }}>
+                        <CardTitle style={{ marginBottom: "4px", textDecoration: "underline", textAlign: "center" }}>
                             <h3>  {data?.Title ?? ""}</h3>
                         </CardTitle>
                     </div>
@@ -29,7 +29,7 @@ const CardDetail = ({ data }) => {
                     <div >
                         <b>{data?.Info ?? ""} </b>
                         <br />
-                        <div style={{ backgroundColor: "aliceblue" }}> 
+                        <div style={{ backgroundColor: "aliceblue" }}>
                             <small>{data?.foot ?? ""}</small>
                         </div>
                     </div>
